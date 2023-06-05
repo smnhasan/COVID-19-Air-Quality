@@ -15,33 +15,33 @@ library(visreg)
 #https://www.maths.ed.ac.uk/~swood34/talks/gam-mgcv.pdf
 #https://petolau.github.io/Analyzing-double-seasonal-time-series-with-GAM-in-R/
 
-setwd('E:\\Air Quality - GAM')
+setwd('E:\\ResearchProject\\Aminul\\COVID-19 Air Quality\\COVID-19 Air Quality')
 Air_Covid <- read.csv("Air_Covid.csv")
 Air_Covid2 <- Air_Covid[8:17]
 
-Air_Covid3 <- subset(Air_Covid2, select = - c(COVID_BBK, PM10.BBK))         # Apply subset function
+Air_Covid3 <- subset(Air_Covid2, select = - c(COVID_BKK, PM10.BKK))         # Apply subset function
 Air_Covid3 
 
 summary(Air_Covid3)
 
-sd(Air_Covid3$COVID_BBK_WM)
-sd(Air_Covid3$PM2.5_BBK)
-sd(Air_Covid3$WS.BBK)
-sd(Air_Covid3$RH.BBK)
-sd(Air_Covid3$AH.BBK)
-sd(Air_Covid3$P_BBK)
-sd(Air_Covid3$R_BBK)
-sd(Air_Covid3$T.BBK)
+sd(Air_Covid3$COVID_BKK_WM)
+sd(Air_Covid3$PM2.5_BKK)
+sd(Air_Covid3$WS.BKK)
+sd(Air_Covid3$RH.BKK)
+sd(Air_Covid3$AH.BKK)
+sd(Air_Covid3$P_BKK)
+sd(Air_Covid3$R_BKK)
+sd(Air_Covid3$T.BKK)
 
 
-t.test(Air_Covid[Air_Covid$Y == '2020', 'COVID_BBK_WM'], Air_Covid[Air_Covid$Y == '2021', 'COVID_BBK_WM'])
-t.test(Air_Covid[Air_Covid$Y == '2020', 'PM2.5_BBK'], Air_Covid[Air_Covid$Y == '2021', 'PM2.5_BBK'])
-t.test(Air_Covid[Air_Covid$Y == '2020', 'WS.BBK'], Air_Covid[Air_Covid$Y == '2021', 'WS.BBK'])
-t.test(Air_Covid[Air_Covid$Y == '2020', 'RH.BBK'], Air_Covid[Air_Covid$Y == '2021', 'RH.BBK'])
-t.test(Air_Covid[Air_Covid$Y == '2020', 'AH.BBK'], Air_Covid[Air_Covid$Y == '2021', 'AH.BBK'])
-t.test(Air_Covid[Air_Covid$Y == '2020', 'P_BBK'], Air_Covid[Air_Covid$Y == '2021', 'P_BBK'])
-t.test(Air_Covid[Air_Covid$Y == '2020', 'R_BBK'], Air_Covid[Air_Covid$Y == '2021', 'R_BBK'])
-t.test(Air_Covid[Air_Covid$Y == '2020', 'T.BBK'], Air_Covid[Air_Covid$Y == '2021', 'T.BBK'])
+t.test(Air_Covid[Air_Covid$Y == '2020', 'COVID_BKK_WM'], Air_Covid[Air_Covid$Y == '2021', 'COVID_BKK_WM'])
+t.test(Air_Covid[Air_Covid$Y == '2020', 'PM2.5_BKK'], Air_Covid[Air_Covid$Y == '2021', 'PM2.5_BKK'])
+t.test(Air_Covid[Air_Covid$Y == '2020', 'WS.BKK'], Air_Covid[Air_Covid$Y == '2021', 'WS.BKK'])
+t.test(Air_Covid[Air_Covid$Y == '2020', 'RH.BKK'], Air_Covid[Air_Covid$Y == '2021', 'RH.BKK'])
+t.test(Air_Covid[Air_Covid$Y == '2020', 'AH.BKK'], Air_Covid[Air_Covid$Y == '2021', 'AH.BKK'])
+t.test(Air_Covid[Air_Covid$Y == '2020', 'P_BKK'], Air_Covid[Air_Covid$Y == '2021', 'P_BKK'])
+t.test(Air_Covid[Air_Covid$Y == '2020', 'R_BKK'], Air_Covid[Air_Covid$Y == '2021', 'R_BKK'])
+t.test(Air_Covid[Air_Covid$Y == '2020', 'T.BKK'], Air_Covid[Air_Covid$Y == '2021', 'T.BKK'])
                      
 ggpairs(Air_Covid3)
 
@@ -49,38 +49,38 @@ ggpairs(Air_Covid3)
 
 Air_Covid$time <- as.Date(Air_Covid$date, format = "%d/%m/%Y")
 
-Air_Covid$COVID_BBK_WM = as.numeric(Air_Covid$COVID_BBK_WM)
-Air_Covid$PM2.5_BBK = as.numeric(Air_Covid$PM2.5_BBK)
-Air_Covid$WS.BBK = as.numeric(Air_Covid$WS.BBK)
-Air_Covid$RH.BBK = as.numeric(Air_Covid$RH.BBK)
-Air_Covid$AH.BBK = as.numeric(Air_Covid$AH.BBK)
-Air_Covid$P_BBK = as.numeric(Air_Covid$P_BBK)
-Air_Covid$R_BBK = as.numeric(Air_Covid$R_BBK)
-Air_Covid$T.BBK = as.numeric(Air_Covid$T.BBK)
+Air_Covid$COVID_BKK_WM = as.numeric(Air_Covid$COVID_BKK_WM)
+Air_Covid$PM2.5_BKK = as.numeric(Air_Covid$PM2.5_BKK)
+Air_Covid$WS.BKK = as.numeric(Air_Covid$WS.BKK)
+Air_Covid$RH.BKK = as.numeric(Air_Covid$RH.BKK)
+Air_Covid$AH.BKK = as.numeric(Air_Covid$AH.BKK)
+Air_Covid$P_BKK = as.numeric(Air_Covid$P_BKK)
+Air_Covid$R_BKK = as.numeric(Air_Covid$R_BKK)
+Air_Covid$T.BKK = as.numeric(Air_Covid$T.BKK)
 Air_Covid$Season = as.factor(Air_Covid$Season)
 
-a <- ggplot(Air_Covid, aes(x=time, y=COVID_BBK_WM,color=Season)) + stat_smooth()+ theme(legend.title = element_text(color = "Black", size = 28),
+a <- ggplot(Air_Covid, aes(x=time, y=COVID_BKK_WM,color=Season)) + stat_smooth()+ theme(legend.title = element_text(color = "Black", size = 28),
                                                                                         legend.text = element_text(color = "Black", size = 28),
                                                                                         text = element_text(size = 28))
-b <- ggplot(Air_Covid, aes(x=time, y=PM2.5_BBK,color=Season)) + stat_smooth()+ theme(legend.title = element_text(color = "Black", size = 28),
+b <- ggplot(Air_Covid, aes(x=time, y=PM2.5_BKK,color=Season)) + stat_smooth()+ theme(legend.title = element_text(color = "Black", size = 28),
                                                                                      legend.text = element_text(color = "Black", size = 28),
                                                                                      text = element_text(size = 28))
-c <- ggplot(Air_Covid, aes(x=time, y=WS.BBK,color=Season)) + stat_smooth()+ theme(legend.title = element_text(color = "Black", size = 28),
+c <- ggplot(Air_Covid, aes(x=time, y=WS.BKK,color=Season)) + stat_smooth()+ theme(legend.title = element_text(color = "Black", size = 28),
                                                                                   legend.text = element_text(color = "Black", size = 28),
                                                                                   text = element_text(size = 28))
-d <- ggplot(Air_Covid, aes(x=time, y=RH.BBK,color=Season)) + stat_smooth()+ theme(legend.title = element_text(color = "Black", size = 28),
+d <- ggplot(Air_Covid, aes(x=time, y=RH.BKK,color=Season)) + stat_smooth()+ theme(legend.title = element_text(color = "Black", size = 28),
                                                                                   legend.text = element_text(color = "Black", size = 28),
                                                                                   text = element_text(size = 28))
-e <- ggplot(Air_Covid, aes(x=time, y=AH.BBK,color=Season)) + stat_smooth()+ theme(legend.title = element_text(color = "Black", size = 28),
+e <- ggplot(Air_Covid, aes(x=time, y=AH.BKK,color=Season)) + stat_smooth()+ theme(legend.title = element_text(color = "Black", size = 28),
                                                                                   legend.text = element_text(color = "Black", size = 28),
                                                                                   text = element_text(size = 28))
-f <- ggplot(Air_Covid, aes(x=time, y=P_BBK,color=Season)) + stat_smooth()+ theme(legend.title = element_text(color = "Black", size = 28),
+f <- ggplot(Air_Covid, aes(x=time, y=P_BKK,color=Season)) + stat_smooth()+ theme(legend.title = element_text(color = "Black", size = 28),
                                                                                  legend.text = element_text(color = "Black", size = 28),
                                                                                  text = element_text(size = 28))
-g <- ggplot(Air_Covid, aes(x=time, y=R_BBK,color=Season)) + stat_smooth()+ theme(legend.title = element_text(color = "Black", size = 28),
+g <- ggplot(Air_Covid, aes(x=time, y=R_BKK,color=Season)) + stat_smooth()+ theme(legend.title = element_text(color = "Black", size = 28),
                                                                                  legend.text = element_text(color = "Black", size = 28),
                                                                                  text = element_text(size = 28))
-h <- ggplot(Air_Covid, aes(x=time, y=T.BBK,color=Season)) + stat_smooth()+ theme(legend.title = element_text(color = "Black", size = 28),
+h <- ggplot(Air_Covid, aes(x=time, y=T.BKK,color=Season)) + stat_smooth()+ theme(legend.title = element_text(color = "Black", size = 28),
                                                                                  legend.text = element_text(color = "Black", size = 28),
                                                                                  text = element_text(size = 28))
 
